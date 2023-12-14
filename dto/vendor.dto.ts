@@ -7,4 +7,5 @@ export interface createVendors{
     phone :string;
     email:string;
     password:string;
+    
 }
