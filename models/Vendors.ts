@@ -1,4 +1,4 @@
-import mongoose, { Mongoose,Schema,model } from "mongoose";
+import mongoose, { Mongoose,Schema,deleteModel,model } from "mongoose";
 
 interface vendordoc extends Document{
     name:string;
@@ -28,7 +28,27 @@ const VendorSchema = new mongoose.Schema({
     ratings: { type: Number },
     salt: { type: String },
     foods: [{ type: mongoose.Schema.ObjectId }],
-}, { timestamps: true });
+},
+{
+    toJSON:{
+        transform(doc,ret){
+            delete ret.password;
+            delete ret.salt;
+            delete ret.__v;
+            delete ret.createdAt;
+            delete ret.updateAt;
+        }
+    },
+
+
+
+
+
+
+
+
+
+ timestamps: true });
 
 const Vendor = mongoose.model<vendordoc>('Vendor', VendorSchema);
 
